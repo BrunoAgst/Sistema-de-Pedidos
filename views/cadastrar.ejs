@@ -1,0 +1,27 @@
+<%- include("./partials/header.ejs") %>
+<body>
+    <div class="container">
+        <div class="card-header">
+            <h3>Cadastrar Pedido</h3>
+        </div>
+        <div class="card-body">
+            <form method="POST" action="/salvarpedido">
+                <label>Nome:</label>
+                <input type="text" name="nome" placeholder="Digite o nome do cliente" class="form-control">
+                <br>
+                <label>Telefone:</label>
+                <input type="text" name="telefone" placeholder="Digite o telefone do cliente" class="form-control">
+                <br>
+                <label>Produto:</label>
+                <input type="text" name="produtoNome" placeholder="Digite o nome do produto" class="form-control">
+                <hr>
+                <input type="text" name="produtoQuantidade" placeholder="Digite a quantidade do produto" class="form-control">
+                <hr>
+                <input type="text" name="produtoValor" placeholder="Digite o Valor do produto" class="form-control">
+                <br>
+                <button name="enviar" class="btn btn-success">Enviar</button>
+            </form>
+        </div>
+    </div>
+</body>
+<%- include("./partials/footer.ejs") %>
