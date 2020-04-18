@@ -1,0 +1,22 @@
+<%- include("./partials/header.ejs") %>
+<body>
+<%- include ('./partials/navbar.ejs') %>
+<br>
+<div class="container">
+    <div class="card-header">
+        <h2>Cliente: <%= pedidos.name %></h2>
+    </div>
+    <div class="card-body">
+        <h4>Telefone: <%= pedidos.phone %></h4>
+        <hr>
+        <h4>Produto: </h4>
+        <div class="container">
+            <h6>Nome: <%= pedidos.nameProduct %></h6>
+            <h6>Quantidade: <%= pedidos.quantity %></h6>
+            <h6>R$ <%= pedidos.amount %></h6>
+        </div>
+        <hr>
+    </div>
+</div>  
+</body>
+<%- include("./partials/footer.ejs") %>

@@ -28,7 +28,7 @@ app.post("/salvarpedido", (req, res) =>{
     var produtoNome = req.body.produtoNome;
     var produtoQuantidade = req.body.produtoQuantidade;
     var produtoValor = req.body.produtoValor;
-    if(produtoQuantidade == ""){ produtoQuantidade = null; }
+    if(produtoQuantidade == ""){ produtoQuantidade = 1; }
     
     Cadastrar.create({
         name: nome,
@@ -42,8 +42,28 @@ app.post("/salvarpedido", (req, res) =>{
     
 });
 
+app.get("/detalhes/:id",(req, res) => {
+    var id = req.params.id;
+    Cadastrar.findOne({
+        where: {id: id}
+    }).then(pedido =>{
+        if(pedido != undefined){
+            res.render("detalhes",{
+                pedidos: pedido
+            });
+        }else{
+            res.redirect("/");
+        }
+    });
+});
+
+app.get("/detalhes-pedido",(req, res) => {
+    res.render("detalhes");
+});
+
 app.get("/", (req, res) => {
-    Cadastrar.findAll({raw: true}).then(pedido =>{
+    Cadastrar.findAll({raw: true, order: [ ["id", "DESC"] 
+    ]}).then(pedido =>{
         res.render("index", {
             pedidos: pedido
         });

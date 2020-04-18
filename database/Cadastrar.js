@@ -7,7 +7,7 @@ const Cadastrar = connection.define('pedidos',{
         allowNull: false
     },
     phone:{
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         allowNull: false
     },
     nameProduct:{
