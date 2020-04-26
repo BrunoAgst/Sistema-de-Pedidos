@@ -1,22 +1,23 @@
 const Sequelize = require('sequelize');
-const connection = require('./database');
+const connection = require('../database/database');
+const Cliente = require('../cliente/Cliente');
 
-const Cadastrar = connection.define('pedidos',{
+const Produto = connection.define('produtos',{
     name:{
         type: Sequelize.STRING,
         allowNull: false
     },
-    phone:{
-        type: Sequelize.STRING,
-        allowNull: false
-    },
-    nameProduct:{
+    slug:{
         type: Sequelize.STRING,
         allowNull: false
     },
     quantity:{
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+    kg:{
         type: Sequelize.INTEGER,
-        allowNull: true
+        allowNull: false
     },
     amount:{
         type: Sequelize.STRING,
@@ -24,6 +25,9 @@ const Cadastrar = connection.define('pedidos',{
     }
 });
 
-Cadastrar.sync({force: false}).then(() => {});
+Cliente.hasMany(Produto);
+Produto.belongsTo(Cliente);
 
-module.exports = Cadastrar;
+//Produto.sync({force: true});
+
+module.exports = Produto;

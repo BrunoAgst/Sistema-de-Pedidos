@@ -3,19 +3,21 @@
 <%- include ('./partials/navbar.ejs') %>
 <br>
 <div class="container">
-    <div class="card-header">
-        <h2>Cliente: <%= pedidos.name %></h2>
-    </div>
-    <div class="card-body">
-        <h4>Telefone: <%= pedidos.phone %></h4>
-        <hr>
-        <h4>Produto: </h4>
-        <div class="container">
-            <h6>Nome: <%= pedidos.nameProduct %></h6>
-            <h6>Quantidade: <%= pedidos.quantity %></h6>
-            <h6>R$ <%= pedidos.amount %></h6>
+    <div class="card">
+        <div class="card-header">
+            <h3>Pedidos:</h3>
+        </div>
+        <% produtos.forEach(produto => { %>
+        <div class="card-body">
+            <% var data = produto.createdAt %>
+            <h4>Data: <%= data.getDate() + "/" + data.getMonth() + "/" + data.getFullYear() %></h4>
+            <h4>Nome: <%= produto.name %></h4>
+            <h4>Quantidade: <%= produto.quantity %></h4>
+            <h4>Kg: <%= produto.kg %></h4>
+            <h4>Valor: R$<%= produto.amount %></h4>
         </div>
         <hr>
+        <% }) %> 
     </div>
 </div>  
 </body>

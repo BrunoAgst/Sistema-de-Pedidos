@@ -4,18 +4,19 @@
     <br>
     <div class="container">
         <hr>
-        <h1>Lista de Pedidos</h1>
+        <h1>Lista de Clientes</h1>
         <hr>
-        <a href="/cadastrar-pedido"><button class="btn btn-success">Cadastrar Pedido</button></a>
+        <a href="/cadastrar-cliente"><button class="btn btn-success">Cadastrar Cliente</button></a>
         <br>
         <br>
-        <% pedidos.forEach(pedido => { %>
+        <% clientes.forEach(cliente => { %>
         <div class="card">
             <div class="card-body">
-                <h3>Cliente: <%= pedido.name %></h3>
+                <h3><%= cliente.name %></h3>
             </div>
             <div class="card-footer">
-                <a href="/detalhes/<%= pedido.id %>"><button class="btn btn-primary">Visualizar Pedido</button></a>
+                <a href="/cadastrar-produto/<%= cliente.slug %>"><button class="btn btn-primary">Cadastrar Produto</button></a>
+                <a href="/detalhes/<%= cliente.slug %>"><button class="btn btn-primary">Visualizar Pedido</button></a>
             </div>
         </div>
         <br>

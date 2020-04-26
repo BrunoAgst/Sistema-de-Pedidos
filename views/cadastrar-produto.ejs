@@ -1,0 +1,41 @@
+<%- include("./partials/header.ejs") %>
+<body>
+    <%- include ('./partials/navbar.ejs') %>
+    <br>
+    <div class="container">
+        <div class="card">
+            
+            <div class="card-header">
+                <h3>Cliente: <%= clientes.name %></h3>
+            </div>
+            <div class="card-body">
+                <h4>Telefone: <%= clientes.phone %></h4>
+            </div>
+        </div>
+        <br>
+        <div class="card">
+            <div class="card-header">
+                <h4>Cadastrar Produtos</h4>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="/salvar-produto">
+                    <label>Nome do Produto:</label>
+                    <input type="text" name="nome" required="required" placeholder="Digite o nome do produto" class="form-control">
+                    <br>
+                    <label>Quantidade:</label>
+                    <input type="text" name="quantidade" placeholder="Digite a quantidade do produto" class="form-control">
+                    <br>
+                    <label>Kg:</label>
+                    <input type="text" name="kg"required="required" placeholder="Digite os Kg do produto" class="form-control">
+                    <br>
+                    <label>Preço:</label>
+                    <input type="text" name="preco" placeholder="Digite o preço do produto" class="form-control">
+                    <br>
+                    <input type="hidden" name="id" value="<%= clientes.id %>">
+                    <button name="enviar" class="btn btn-success">Enviar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+<%- include("./partials/footer.ejs") %>
