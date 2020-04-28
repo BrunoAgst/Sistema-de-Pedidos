@@ -8,6 +8,11 @@ router.get("/login", (req, res) => {
     res.render("login");
 });
 
+router.get("/logout", (req, res) => {
+    req.session.usuario = undefined;
+    res.redirect("login");
+});
+
 router.post("/authenticate", (req, res) => {
     var email = req.body.email;
     var senha = req.body.senha;
