@@ -3,8 +3,10 @@ const router = express.Router();
 const Cliente = require('../cliente/Cliente');
 const Produto = require('./Produto');
 const slugify = require('slugify');
+const auth = require('../middleware/auth');
 
-router.get("/cadastrar-produto/:slug", (req, res) => {
+
+router.get("/cadastrar-produto/:slug", auth, (req, res) => {
     var slug = req.params.slug;
     Cliente.findOne({
         where: {slug: slug}
@@ -19,7 +21,7 @@ router.get("/cadastrar-produto/:slug", (req, res) => {
     })
 });
 
-router.post("/salvar-produto", (req, res) => {
+router.post("/salvar-produto", auth, (req, res) => {
     var nome = req.body.nome;
     var quantidade = req.body.quantidade;
     var kg = req.body.kg;

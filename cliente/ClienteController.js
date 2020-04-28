@@ -3,12 +3,13 @@ const router = express.Router();
 const Cliente = require('./Cliente');
 const Produto = require('../produto/Produto');
 const slugify = require('slugify');
+const auth = require('../middleware/auth');
 
-router.get("/cadastrar-cliente", (req, res) => {
+router.get("/cadastrar-cliente", auth, (req, res) => {
     res.render('cadastrar-cliente');
 });
 
-router.post("/salvar-cliente", (req, res) =>{
+router.post("/salvar-cliente", auth, (req, res) =>{
     var nome = req.body.nome;
     var telefone = req.body.telefone;
     var endereco = req.body.endereco;
@@ -25,7 +26,7 @@ router.post("/salvar-cliente", (req, res) =>{
     
 });
 
-router.get("/detalhes/:slug",(req, res) => {
+router.get("/detalhes/:slug", auth, (req, res) => {
     var slug = req.params.slug;
     Cliente.findOne({
         where: {slug: slug},
@@ -41,7 +42,7 @@ router.get("/detalhes/:slug",(req, res) => {
     });
 });
 
-router.get("/detalhes-pedido",(req, res) => {
+router.get("/detalhes-pedido", auth, (req, res) => {
     res.render("detalhes");
 });
 

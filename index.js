@@ -5,6 +5,10 @@ const bodyParser = require('body-parser');
 const clienteController = require('./cliente/ClienteController');
 const produtoController = require('./produto/ProdutoController');
 const Cliente = require('./cliente/Cliente');
+const usuarioController = require('./usuario/UsuarioController');
+const Usuario = require('./usuario/Usuario');
+const session = require('express-session');
+const auth = require('./middleware/auth');
 
 connection
     .authenticate()
@@ -15,14 +19,22 @@ connection
         console.log(error);
     })
 
+
+app.use(session({
+    secret: "hdwfwueihfiuwesvfgrbht",
+    cookie: { maxAge: 300000}
+
+}));
+
 app.set("view engine", "ejs");
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use("/", clienteController);
 app.use("/", produtoController);
+app.use("/", usuarioController);
 
-app.get("/", (req, res) => {
+app.get("/", auth, (req, res) => {
     Cliente.findAll({raw: true, order: [ ["id", "DESC"] 
     ]}).then(cliente =>{
         res.render("index", {
