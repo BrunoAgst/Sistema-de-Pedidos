@@ -67,10 +67,10 @@ router.post("/salvar-usuario", auth, (req, res) => {
                 senha: hash
 
             }).then(() => {
-                res.redirect("/");
+                res.redirect("visualizar-usuario");
             }).catch((err) => {
                 console.log(err);
-                res.redirect("/");
+                res.redirect("visualizar-usuario");
             })
         }
         else{
@@ -78,5 +78,32 @@ router.post("/salvar-usuario", auth, (req, res) => {
         }
     });
 });
+
+router.get("/visualizar-usuarios", auth, (req, res) => {
+    Usuario.findAll({raw: true}).then(usuario => {
+        res.render("visualizar-usuarios",{usuarios: usuario});
+    })
+    
+});
+
+router.post("/excluir-usuario", auth, (req, res) => {
+    var id = req.body.id;
+    if(id != undefined){
+        if(!isNaN(id)){
+            Usuario.destroy({
+                where: {
+                    id: id
+                }
+            }).then(() => {
+                res.redirect("visualizar-usuarios")
+            })
+        } else{
+        res.redirect("visualizar-usuarios")
+        }
+    } else{
+        res.redirect("visualizar-usuarios")
+    }
+});
+
 
 module.exports = router;

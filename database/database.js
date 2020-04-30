@@ -1,9 +1,8 @@
 const Sequelize = require('sequelize');
 
-const connection = new Sequelize('sistema_pedidos', 'brunoagst', '19961215br.',{
-    host: 'mysql669.umbler.com',
+const connection = new Sequelize('sistema_controle_pedidos', 'root', '15121996br.',{
+    host: 'localhost',
     dialect: 'mysql',
-    timezone: '-03:00'
 });
 
 module.exports = connection;

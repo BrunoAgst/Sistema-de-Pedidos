@@ -1,0 +1,43 @@
+<%- include("./partials/header.ejs") %>
+<body>
+    <%- include ('./partials/navbar.ejs') %>
+    <br>
+    <div class="container">
+        <hr>
+        <nav class="navbar navbar-expand">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <h1 class="nav-link">Lista de Usuários</h1>
+                </li>
+            </ul>
+        </nav>
+        <hr>
+        <a href="/novo-usuario"><button class="btn btn-success">Cadastrar Usuário</button></a>
+        <br>
+        <br>
+        <% usuarios.forEach(usuario => { %>
+        <div class="card">
+            <div class="card-body">
+                <h4><%= usuario.email %></h4>
+            </div>
+            <div class="card-footer">
+                <form method="POST" action="/excluir-usuario" onsubmit="confirmarDelecao(event, this)">
+                    <input type="hidden" name="id" value="<%= usuario.id %>">
+                    <button class="btn btn-danger">Excluir Usuário</button>
+                </form>
+            </div>
+        </div>
+        <% }) %>
+        <br>
+    </div>
+</body>
+<%- include("./partials/footer.ejs") %>
+<script>
+    function confirmarDelecao(event, form){
+        event.preventDefault();
+        var decision = confirm("Tem certeza que deseja deletar este cliente?");
+        if(decision){
+            form.submit();
+        }
+    }
+</script>

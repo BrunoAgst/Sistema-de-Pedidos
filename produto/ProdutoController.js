@@ -41,4 +41,19 @@ router.post("/salvar-produto", auth, (req, res) => {
 });
 
 
+router.post("/excluir-pedido", auth, (req, res) => {
+    var id = req.body.id;
+    if(id != undefined){
+        if(!isNaN(id)){
+            Produto.destroy({ where: {id: id}}).then(() => {
+                res.redirect("/");
+            })
+        }else{
+            res.redirect("/")
+        }
+    }else{
+        res.redirect("/")
+    }
+})
+
 module.exports = router;

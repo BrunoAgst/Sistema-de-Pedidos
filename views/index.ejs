@@ -12,12 +12,12 @@
             </ul>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="btn btn-warning nav-link" href=""> Gerenciar Usuários</a>
+                    <a class="btn btn-warning nav-link" href="/visualizar-usuarios"> Gerenciar Usuários</a>
                 </li>
             </ul>
         </nav>
         <hr>
-        <a href="/cadastrar-cliente"><button class="btn btn-success">Cadastrar Cliente</button></a>
+        <a href="/cadastrar-cliente"><button class="btn btn-success">Cadastrar Pedido</button></a>
         <br>
         <br>
         <% clientes.forEach(cliente => { %>
@@ -26,8 +26,9 @@
                 <h3><%= cliente.name %></h3>
             </div>
             <div class="card-footer">
-                <a href="/cadastrar-produto/<%= cliente.slug %>"><button class="btn btn-primary">Cadastrar Produto</button></a>
+                <a href="/cadastrar-produto/<%= cliente.slug %>"><button class="btn btn-success">Cadastrar Produto</button></a>
                 <a href="/detalhes/<%= cliente.slug %>"><button class="btn btn-primary">Visualizar Pedido</button></a>
+                <a href="/excluir-cliente/<%= cliente.id %>"><button class="btn btn-danger">Excluir Cliente</button></a>
             </div>
         </div>
         <br>
