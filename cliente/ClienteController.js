@@ -46,4 +46,67 @@ router.get("/detalhes-pedido", auth, (req, res) => {
     res.render("detalhes");
 });
 
-module.exports = router
+router.post("/excluir-cliente", auth, (req, res) => {
+    var id = req.body.id;
+    if(id != undefined){
+        if(!isNaN(id)){
+            Produto.findAll({
+                where: {
+                    clienteId: id
+                }
+            }).then(produtos => {
+                Produto.destroy({
+                    where: {
+                        clienteId: id 
+                    }
+                }).then(() => {
+                    Cliente.destroy({
+                        where: {
+                            id: id
+                        }
+                    }).then(() => {
+                        res.redirect("/");
+                    })
+                })
+            });
+        }else{
+            res.redirect("/");
+        }
+    }else{
+        res.redirect("/");
+    }
+});
+
+router.get("/editar-cliente/:slug", (req, res) => {
+    var slug = req.params.slug;
+    if(slug != undefined){
+        Cliente.findOne({where: {slug: slug}}).then(cliente => {
+            res.render("editar-cliente", {clientes: cliente});
+        });
+    }else{
+        res.redirect("/");
+    }
+});
+
+
+router.post("/editar-cliente/update", auth, (req, res) => {
+
+    var id = req.body.id;
+    var nome = req.body.nome;
+    var endereco = req.body.endereco;
+    var telefone = req.body.telefone;
+    var slug = slugify(nome);
+    
+    Cliente.update({name: nome, slug: slug, phone: telefone, address: endereco}, 
+            { where: { 
+                id: id 
+            }}).then(() => {
+                res.redirect("/");
+            })
+
+
+});
+
+
+
+module.exports = router;

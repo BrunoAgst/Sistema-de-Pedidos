@@ -1,0 +1,26 @@
+<%- include("./partials/header.ejs") %>
+<body>
+    <%- include ('./partials/navbar.ejs') %>
+    <br>
+    <div class="container">
+        <div class="card-header">
+            <h3>Editar Cliente</h3>
+        </div>
+        <div class="card-body">
+            <form method="POST" action="/editar-cliente/update">
+                <input type="hidden" name="id" value="<%= clientes.id %>">
+                <label>Nome:</label>
+                <input type="text" name="nome" required="required" placeholder="Digite o nome" class="form-control" value="<%= clientes.name %>">
+                <br>
+                <label>Quantidade:</label>
+                <input type="text" name="telefone" placeholder="Digite o telefone" class="form-control" value="<%= clientes.phone %>">
+                <br>
+                <label>Endereço:</label>
+                <input type="text" name="endereco" placeholder="Digite o endereço" class="form-control" value="<%= clientes.address %>">
+                <br>
+                <button name="enviar" class="btn btn-success">Enviar</button>
+            </form>
+        </div>
+    </div>
+</body>
+<%- include("./partials/footer.ejs") %>

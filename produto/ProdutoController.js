@@ -56,4 +56,37 @@ router.post("/excluir-pedido", auth, (req, res) => {
     }
 })
 
+
+router.get("/editar-pedido/:id", auth, (req, res) => {
+    var id = req.params.id;
+    Produto.findByPk(id).then(pedido => {
+        if(pedido != undefined){
+            if(!isNaN(id)){
+                res.render("editar-pedido", {pedidos: pedido});
+            } else{
+                res.redirect("/");
+            }
+        }else{
+            res.redirect("/");
+        }
+    })
+});
+
+router.post("/editar-pedido/update", auth, (req, res) => {
+    var id = req.body.id;
+    var nome = req.body.nome;
+    var slug = slugify(nome);
+    var quantidade = req.body.quantidade;
+    var kg = req.body.kg;
+    var valor = req.body.valor;
+
+    Produto.update({name: nome, slug: slug, quantity: quantidade, kg: kg, amount: valor},
+        {where: {
+            id: id
+        }
+    }).then(() => {
+        res.redirect("/detalhes/" + slug);
+    })
+});
+
 module.exports = router;

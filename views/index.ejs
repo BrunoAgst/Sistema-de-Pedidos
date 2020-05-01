@@ -10,25 +10,49 @@
                     <h1 class="nav-link">Lista de Clientes</h1>
                 </li>
             </ul>
-            <ul class="navbar-nav ml-auto">
+            <ul class="navbar-nav mr-4">
                 <li class="nav-item">
                     <a class="btn btn-warning nav-link" href="/visualizar-usuarios"> Gerenciar Usuários</a>
                 </li>
             </ul>
         </nav>
         <hr>
-        <a href="/cadastrar-cliente"><button class="btn btn-success">Cadastrar Pedido</button></a>
+        <a href="/cadastrar-cliente"><button class="btn btn-success ml-4">Cadastrar Cliente</button></a>
         <br>
         <br>
         <% clientes.forEach(cliente => { %>
         <div class="card">
             <div class="card-body">
-                <h3><%= cliente.name %></h3>
-            </div>
+                <nav class="navbar navbar-expand">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="col-pd mr-6"><h3 class="col-md"><%= cliente.name %></h3></a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav mr-0 pl-0">
+                        <li class="nav-item">
+                            <a class="col" href="/editar-cliente/<%= cliente.slug %>"><button class="btn btn-warning">Alterar dados</button></a>
+                        </li>
+                    </ul>
+                </nav>
+           </div>
             <div class="card-footer">
-                <a href="/cadastrar-produto/<%= cliente.slug %>"><button class="btn btn-success">Cadastrar Produto</button></a>
-                <a href="/detalhes/<%= cliente.slug %>"><button class="btn btn-primary">Visualizar Pedido</button></a>
-                <a href="/excluir-cliente/<%= cliente.id %>"><button class="btn btn-danger">Excluir Cliente</button></a>
+                <nav class="navbar navbar-expand">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item mr-4">
+                            <a href="/cadastrar-produto/<%= cliente.slug %>"><button class="btn btn-success col-md">Cadastrar Pedido</button></a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/detalhes/<%= cliente.slug %>"><button class="btn btn-primary col-md">Visualizar Pedido</button></a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav mr-2 pr-1">
+                        <form method="POST" action="/excluir-cliente">
+                            <input type="hidden" name="id" value="<%= cliente.id %>">
+                            <button class="btn btn-danger">Excluir Cliente</button>
+                        </form>
+                    </ul>
+                </nav>
             </div>
         </div>
         <br>

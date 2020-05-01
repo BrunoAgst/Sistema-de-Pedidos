@@ -15,12 +15,15 @@
             <h4>Quantidade: <%= produto.quantity %></h4>
             <h4>Kg: <%= produto.kg %></h4>
             <h4>Valor: R$<%= produto.amount %></h4>
+            <div class="row">
+                <a href="/editar-pedido/<%= produto.id %>" class="btn btn-warning ml-3">Alterar Pedido</a>
+                <form action="/excluir-pedido" method="post">
+                    <input type="hidden" name="id" value="<%= produto.id %>">
+                    <button class="btn btn-danger ml-3">Excluir Pedido</button></a>
+                </form>
+                <hr>
+            </div>
         </div>
-        <form action="/excluir-pedido" method="post">
-            <input type="hidden" name="id" value="<%= produto.id %>">
-            <button class="btn btn-primary">Excluir Pedido</button></a>
-        </form>
-        <hr>
         <% }) %> 
     </div>
 </div>  
