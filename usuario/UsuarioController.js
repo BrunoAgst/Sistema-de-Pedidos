@@ -67,14 +67,14 @@ router.post("/salvar-usuario", auth, (req, res) => {
                 senha: hash
 
             }).then(() => {
-                res.redirect("visualizar-usuario");
+                res.redirect("visualizar-usuarios");
             }).catch((err) => {
                 console.log(err);
-                res.redirect("visualizar-usuario");
+                res.redirect("visualizar-usuarios");
             })
         }
         else{
-            res.redirect("/novo-usuario");
+            res.redirect("/novo-usuarios");
         }
     });
 });

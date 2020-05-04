@@ -17,7 +17,7 @@
             <h4>Valor: R$<%= produto.amount %></h4>
             <div class="row">
                 <a href="/editar-pedido/<%= produto.id %>" class="btn btn-warning ml-3">Alterar Pedido</a>
-                <form action="/excluir-pedido" method="post">
+                <form action="/excluir-pedido" method="post" onsubmit="confirmarDelecao(event,this)">
                     <input type="hidden" name="id" value="<%= produto.id %>">
                     <button class="btn btn-danger ml-3">Excluir Pedido</button></a>
                 </form>
@@ -29,3 +29,13 @@
 </div>  
 </body>
 <%- include("./partials/footer.ejs") %>
+
+<script>
+    function confirmarDelecao(event, form){
+        event.preventDefault(); 
+        var decisisao = confirm("Tem certeza que deseja excluir este pedido?");
+        if(decisisao){
+            form.submit();
+        } 
+    }    
+</script>

@@ -47,7 +47,7 @@
                         </li>
                     </ul>
                     <ul class="navbar-nav mr-2 pr-1">
-                        <form method="POST" action="/excluir-cliente">
+                        <form method="POST" action="/excluir-cliente" onsubmit="confirmarDelecao(event, this)">
                             <input type="hidden" name="id" value="<%= cliente.id %>">
                             <button class="btn btn-danger">Excluir Cliente</button>
                         </form>
@@ -60,3 +60,13 @@
     </div>
 </body>
 <%- include("./partials/footer.ejs") %>
+
+<script>
+    function confirmarDelecao(event, form){
+        event.preventDefault(); 
+        var decisisao = confirm("Tem certeza que deseja excluir este cliente?");
+        if(decisisao){
+            form.submit();
+        } 
+    }    
+</script>
